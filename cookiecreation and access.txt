@@ -1,0 +1,11 @@
+Assigning value to cookie in javascript
+ var s = "pasupathi";
+            $.cookie("name", s);
+
+Retrive a value from cookie in javascript
+ if ($.cookie("name") != null) {
+                var s = $.cookie("name");
+            }
+
+Retrive a value from cookie from .cs
+System.Web.HttpCookie authCookie = Context.Request.Cookies["name"];
