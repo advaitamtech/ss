@@ -1,0 +1,22 @@
+---------------1st meathod---------------------
+string url=serviceurl
+HttpWebRequest wr = (HttpWebRequest)WebRequest.Create(url);
+        var response = (HttpWebResponse)wr.GetResponse();
+        Stream webStream = response.GetResponseStream();
+        StreamReader responseReader = new StreamReader(webStream);
+       // return responseReader.ReadToEnd();
+
+ var res = JsonConvert.DeserializeObject<CompanyList>(responseStr);
+
+
+----------------second meathod--------------------------
+
+ WebClient wc = new WebClient();
+            string service = ConfigurationManager.AppSettings["Serviceurl"] + "RMSCOMPANY.svc/ViewClient?PartitionID=" + partitionid;
+            wc.Headers["Content-type"] = "application/json";
+
+            byte[] data1 = wc.DownloadData(service);
+            MemoryStream ms = new MemoryStream(data1);
+            DataContractJsonSerializer ser = new DataContractJsonSerializer(typeof(Clients));
+
+            Clients ContactResponse = ser.ReadObject(ms) as Clients;
